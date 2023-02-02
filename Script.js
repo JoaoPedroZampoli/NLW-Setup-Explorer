@@ -5,14 +5,33 @@ const button = document.querySelector("header button")
 button.addEventListener("click", add)
 form.addEventListener("change", save)
 
+toastr.options = {
+    "closeButton": true,
+    "debug": false,
+    "newestOnTop": false,
+    "progressBar": true,
+    "positionClass": "toast-top-right",
+    "preventDuplicates": false,
+    "onclick": null,
+    "showDuration": "300",
+    "hideDuration": "1000",
+    "timeOut": "4000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "fadeIn",
+    "hideMethod": "fadeOut"
+}
+
 function add(){
     const today = new Date().toLocaleDateString("pt-br").slice(0, 5)
     const dayExists = nlwSetup.dayExists(today)
     if(dayExists){
-        alert("Dia já incluso")
+        toastr.warning("Dia já incluso")
         return
     }
     nlwSetup.addDay(today)
+    toastr.success("Dia adicionado com sucesso")
 }
 
 function save() {
